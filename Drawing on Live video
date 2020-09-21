@@ -1,0 +1,33 @@
+import cv2
+
+cap=cv2.VideoCapture(0)
+
+width=int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+height=int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+x=width//2
+y=height//2
+
+w=width//4
+h=height//4
+
+# Bottom Right Corner == x + w, y + h
+
+while True:
+    ret,frame=cap.read()
+
+    # Rectangle Frame
+    cv2.rectangle(frame,(x,y),(x+w, y+h),color=(255,0,255),thickness=5)
+    
+ 
+    cv2.imshow('frame',frame)
+    
+    # If you try to close the window pressing x,Renu,you'll get in trouble (^_^)
+    if cv2.waitKey(3) & 0xFF==ord('q'):
+        break
+    
+    
+# Never forget first to release
+# And then to destroy
+cap.release()
+cv2.destroyAllWindows()
